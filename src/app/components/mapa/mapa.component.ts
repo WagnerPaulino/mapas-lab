@@ -1,5 +1,5 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import * as L from 'leaflet';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { MapService } from 'src/app/service/map.service';
 
 @Component({
   selector: 'app-mapa',
@@ -8,33 +8,13 @@ import * as L from 'leaflet';
 })
 export class MapaComponent implements OnInit, AfterViewInit {
 
-  private map;
-
-  constructor() { }
+  constructor(private mapService: MapService) { }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
-    this.initMap();
+    this.mapService.initMap('map');
   }
 
-  initMap() {
-    this.map = L.map('map', {
-      center: [39.8282, -98.5795],
-      zoom: 3
-    });
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    });
-    tiles.addTo(this.map);
-    this.map.on('dblclick', ({ latlng }) => {
-      console.log(latlng);
-      L.marker([latlng.lat, latlng.lng]).addTo(this.map)
-        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-        .openPopup();
-    });
-
-  }
 }

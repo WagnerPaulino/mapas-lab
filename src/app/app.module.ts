@@ -1,14 +1,14 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MapaComponent } from './components/mapa/mapa.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    MapaComponent
+    MapaComponent,
   ],
   imports: [
     BrowserModule,
