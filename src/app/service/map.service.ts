@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Map, map, tileLayer, marker } from 'leaflet';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,9 @@ export class MapService {
 
   private map: Map;
 
-  constructor() {}
+  public onDbClick: Subject<{ lat, lng }> = new Subject();
+
+  constructor() { }
 
   initMap(elementId: string) {
     this.map = map(elementId, {
@@ -21,9 +24,13 @@ export class MapService {
     });
     tiles.addTo(this.map);
     this.map.on('dblclick', ({ latlng }: any) => {
-      marker([latlng.lat, latlng.lng]).addTo(this.map)
-        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-        .openPopup();
+      this.onDbClick.next({ lat: latlng.lat, lng: latlng.lng });
     });
+  }
+
+  addPopup({ lat, lng, html }) {
+    marker([lat, lng]).addTo(this.map)
+      .bindPopup(html)
+      .openPopup();
   }
 }

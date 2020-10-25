@@ -1,0 +1,18 @@
+<div fxLayout="column">
+    <div fxLayout="row">
+        <h2 mat-dialog-title>Adicionar Popup</h2>
+    </div>
+    <form fxLayout="row" autocomplete="off" (submit)="submit()">
+        <div fxLayout="column">
+            <div fxLayout="row">
+                <mat-form-field>
+                    <mat-label>Mensagem</mat-label>
+                    <input matInput name="message" [ngModel]="message" ngDefaultControl>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row">
+                <button mat-flat-button color="primary">Concluir</button>
+            </div>
+        </div>
+    </form>
+</div>
