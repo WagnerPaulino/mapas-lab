@@ -17,8 +17,7 @@ export class PopupMapaFormComponent implements OnInit {
   }
 
   submit() {
-    
-    this.dialogRef.close();
+    this.dialogRef.close({ message: this.message });
   }
 
 }

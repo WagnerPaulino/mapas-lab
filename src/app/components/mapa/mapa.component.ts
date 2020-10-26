@@ -21,6 +21,10 @@ export class MapaComponent implements OnInit, AfterViewInit {
       this.dialog.open(PopupMapaFormComponent, {
         data: { lat, lng },
         disableClose: true
+      }).afterClosed().subscribe(({ message }) => {
+        if (message.trim().length) {
+          this.mapService.addPopup({ lat: lat, lng: lng, html: `<p>${message}</p>` })
+        }
       })
     })
   }
